@@ -1,4 +1,3 @@
-let quotemessage = document.querySelector(".quote-message");
 let buttonQuote = document.querySelector(".button");
 let quoteMessage = document.querySelector(".quote-message");
 let quoteAuthor = document.querySelector(".author");
@@ -7,13 +6,15 @@ let apiQuotes = [];
 
 async function getQuotes() {
 	if (apiQuotes.length == 0) {
-		const apiUrl = "https://type.fit/api/quotes";
+		const apiUrl = "https://chux05.github.io/mockdata/quotes.json";
 		try {
 			const response = await fetch(apiUrl);
 			apiQuotes = await response.json();
-			console.log(apiQuotes);
 		} catch (error) {
-			console.error("Error:", error);
+			var element = document.getElementById("quoteText");
+			element.innerHTML = "Error loading quotes. Please try again later.";
+			quoteAuthor.innerHTML = "Hopefuly the developer will fix this soon.";
+			showPage();
 		}
 	}
 	selectQuote();
